@@ -9,7 +9,7 @@ def get_last_item(li):
 
 
 def get_second_and_third_items(li):
-    return li[2:4]
+    return li[1:3]
 
 def get_sum(li):
     a = sum(li)
