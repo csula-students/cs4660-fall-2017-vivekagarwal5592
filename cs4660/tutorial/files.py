@@ -17,10 +17,6 @@ class SimpleFile(object):
         avg = (float(sum(l))/len(l))
         return avg
 
-
-
-
-
     def get_max(self, line_number):
         file = open("./test/fixtures/array.txt", "r")
         data = (file.readlines()[line_number])

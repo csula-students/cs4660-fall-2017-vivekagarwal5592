@@ -20,4 +20,3 @@ def get_avg(li):
     x = sum(li)
     avg = x/len(li)
     return avg
-

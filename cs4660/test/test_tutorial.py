@@ -44,8 +44,6 @@ class SimpleFileTestCase(unittest.TestCase):
     def setUp(self):
         file_path = './test/fixtures/array.txt'
         self.simple_file = files.SimpleFile(file_path)
-        print ("In setup")
-
 
     def test_mean(self):
         """test_mean tests to see if file can get mean properly"""
