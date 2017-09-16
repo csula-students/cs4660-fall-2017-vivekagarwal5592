@@ -116,7 +116,11 @@ class AdjacencyList(object):
 
     def neighbors(self, node):
         list =(self.adjacency_list[node]).keys()
-        return list
+        l = []
+        for i in range(len(list)):
+            l.append(list[i])
+        print (l)
+        return l
 
     def add_node(self, node):
         if (node in self.adjacency_list):
