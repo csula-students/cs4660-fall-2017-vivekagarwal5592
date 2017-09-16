@@ -115,10 +115,8 @@ class AdjacencyList(object):
             return False
 
     def neighbors(self, node):
-        list =(self.adjacency_list[node]).copy().keys()
-        return list
-
-
+       return list(self.adjacency_list[node])
+        
     def add_node(self, node):
         if (node in self.adjacency_list):
             return False
