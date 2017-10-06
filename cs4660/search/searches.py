@@ -1,8 +1,8 @@
 """
 Searches module defines all different search algorithms
 """
-from graph.utils import Tile
-from graph.graph import Node
+from graph.utils import *
+from graph.graph import *
 def bfs(graph, initial_node, dest_node):
     Q = []
     visited_nodes = []
