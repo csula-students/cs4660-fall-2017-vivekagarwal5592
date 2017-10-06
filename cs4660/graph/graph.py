@@ -187,17 +187,21 @@ class AdjacencyMatrix(object):
         for i in range(len(self.adjacency_matrix[index_node])):
             if self.adjacency_matrix[index_node][i] != 0:
                 list.append(self.nodes[i])
+                #list =   [self.nodes[i]] +list
         list.sort(key=lambda x: x.data)
         return list
 
     def add_node(self, node):
         if node not in self.nodes:
             list = [0 for j in range(len(self.nodes))]
-            self.adjacency_matrix.append(list)
-            (self.nodes).append(node)
+            self.adjacency_matrix=[list] + self.adjacency_matrix
+            self.nodes=[node] + self.nodes
+            # self.adjacency_matrix.append(list)
+            # (self.nodes).append(node)
             for i in range(len(self.adjacency_matrix)):
-                self.adjacency_matrix[i].append(0)
-           # print(self.adjacency_matrix)
+                self.adjacency_matrix[i]=[0] +self.adjacency_matrix[i]
+                # self.adjacency_matrix[i].append(0)
+
             return True
         else:
             return False

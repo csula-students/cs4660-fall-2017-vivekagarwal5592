@@ -1,5 +1,5 @@
-from graph.graph import Node
-from graph.graph import Edge
+from graph import Node
+from graph import Edge
 class Tile(object):
     """Node represents basic unit of graph"""
     def __init__(self, x, y, symbol):
