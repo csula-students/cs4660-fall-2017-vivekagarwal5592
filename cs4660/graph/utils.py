@@ -1,4 +1,4 @@
-import graph as g
+from . import graph
 
 class Tile(object):
     """Node represents basic unit of graph"""
@@ -24,7 +24,7 @@ class Tile(object):
 
 
 
-def parse_grid_file(graph, file_path):
+def parse_grid_file(g, file_path):
     """
     ParseGridFile parses the grid file implementation from the file path line
     by line and construct the nodes & edges to be added to graph
@@ -51,8 +51,8 @@ def parse_grid_file(graph, file_path):
                  y +=1
                  continue
             else:
-                a = g.Node(Tile(y,x,data[i][j]+data[i][j+1]))
-                graph.add_node(a)
+                a = graph.Node(Tile(y,x,data[i][j]+data[i][j+1]))
+                g.add_node(a)
                 y +=1
                 j +=2
         y =0
@@ -81,23 +81,23 @@ def parse_grid_file(graph, file_path):
             else:
                 if (data[i + 1][j] != '-' and data[i + 1][j] != '+' and data[i + 1][j] != '#' and data[i + 1][
                     j] != '|'):
-                    a = g.Node(Tile(y, x, data[i][j] + data[i][j + 1]))
-                    b = g.Node(Tile(y, x + 1, data[i + 1][j] + data[i + 1][j + 1]))
-                    graph.add_edge(g.Edge(a, b, 1))
+                    a = graph.Node(Tile(y, x, data[i][j] + data[i][j + 1]))
+                    b = graph.Node(Tile(y, x + 1, data[i + 1][j] + data[i + 1][j + 1]))
+                    g.add_edge(graph.Edge(a, b, 1))
                 if(data[i][j+2] != '-' and data[i][j+2] != '+' and data[i][j+2] != '#' and data[i][j+2] !='|'):
-                    a = g.Node(Tile(y,x,data[i][j]+data[i][j+1]))
-                    b = g.Node(Tile(y+1,x,data[i][j+2]+data[i][j+3]))
-                    graph.add_edge(g.Edge(a, b, 1))
+                    a = graph.Node(Tile(y,x,data[i][j]+data[i][j+1]))
+                    b = graph.Node(Tile(y+1,x,data[i][j+2]+data[i][j+3]))
+                    g.add_edge(graph.Edge(a, b, 1))
                 if (data[i][j - 1] != '-' and data[i][j - 1] != '+' and data[i][j - 1] != '#' and data[i][
                         j - 1] != '|'):
-                    a = g.Node(Tile(y, x, data[i][j] + data[i][j + 1]))
-                    b = g.Node(Tile(y - 1, x, data[i][j -2] + data[i][j -1]))
-                    graph.add_edge(g.Edge(a, b, 1))
+                    a = graph.Node(Tile(y, x, data[i][j] + data[i][j + 1]))
+                    b = graph.Node(Tile(y - 1, x, data[i][j -2] + data[i][j -1]))
+                    g.add_edge(graph.Edge(a, b, 1))
                 if (data[i - 1][j] != '-' and data[i - 1][j] != '+' and data[i - 1][j] != '#' and data[i - 1][
                     j] != '|'):
-                    a = g.Node(Tile(y, x, data[i][j] + data[i][j + 1]))
-                    b = g.Node(Tile(y, x - 1, data[i - 1][j] + data[i - 1][j + 1]))
-                    graph.add_edge(g.Edge(a, b, 1))
+                    a = graph.Node(Tile(y, x, data[i][j] + data[i][j + 1]))
+                    b = graph.Node(Tile(y, x - 1, data[i - 1][j] + data[i - 1][j + 1]))
+                    g.add_edge(graph.Edge(a, b, 1))
                 y += 1
                 j += 2
         y = 0
@@ -108,7 +108,7 @@ def parse_grid_file(graph, file_path):
     # if list is not None:
     #     for i in list:
     #         print (i)
-    return graph
+    return g
 
     # TODO: read the filepaht line by line to construct nodes & edges
 
