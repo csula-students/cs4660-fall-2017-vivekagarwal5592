@@ -40,12 +40,16 @@ def construct_graph_from_file(graph, file_path):
     f = open(file_path)
     data = f.read()
     data = data.split('\n')
+
     for i in range(len(data)):
         if (i == 0):
+            no_of_nodes =data[i]
+            for j in range(int(no_of_nodes)):
+                graph.add_node(Node(j))
             continue
         row = data[i].split(':')
-        graph.add_node(Node(int(row[0])))
-        graph.add_node(Node(int(row[1])))
+       # graph.add_node(Node(int(row[0])))
+        #graph.add_node(Node(int(row[1])))
         a = Node(int(row[0]))
         b = Node(int(row[1]))
         x = Edge(a,b,int(row[2]))
@@ -188,20 +192,20 @@ class AdjacencyMatrix(object):
             if self.adjacency_matrix[index_node][i] != 0:
                 list.append(self.nodes[i])
                 #list =   [self.nodes[i]] +list
-        list.sort(key=lambda x: x.data)
+        #list.sort(key=lambda x: x.data)
         return list
 
     def add_node(self, node):
         if node not in self.nodes:
             list = [0 for j in range(len(self.nodes))]
-            self.adjacency_matrix=[list] + self.adjacency_matrix
-            self.nodes=[node] + self.nodes
-            # self.adjacency_matrix.append(list)
-            # (self.nodes).append(node)
+            #self.adjacency_matrix=[list] + self.adjacency_matrix
+            #self.nodes=[node] + self.nodes
+            self.adjacency_matrix.append(list)
+            (self.nodes).append(node)
             for i in range(len(self.adjacency_matrix)):
-                self.adjacency_matrix[i]=[0] +self.adjacency_matrix[i]
-                # self.adjacency_matrix[i].append(0)
-
+                #self.adjacency_matrix[i]=[0] +self.adjacency_matrix[i]
+                self.adjacency_matrix[i].append(0)
+            #print(self.nodes)
             return True
         else:
             return False
