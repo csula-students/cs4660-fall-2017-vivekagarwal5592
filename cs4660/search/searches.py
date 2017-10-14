@@ -106,12 +106,6 @@ def dijkstra_search(graph, initial_node, dest_node):
 
 def a_star_search(graph, initial_node, dest_node):
 
-    source_tile = initial_node.data.x
-    #print(source_tile)
-    #get_heuristic_cost(initial_node, dest_node)
-
-
-    #print (dest_node)
 
     Q = {}
     hc = {}
@@ -127,12 +121,8 @@ def a_star_search(graph, initial_node, dest_node):
     visited_nodes.append(initial_node)
     while (bool(Q)):
         current_node = min(hc, key=hc.get)
-        #print ("current node",current_node,get_heuristic_cost(current_node, dest_node))
-        hc.pop(current_node)
         Q.pop(current_node)
         visited_nodes.append(current_node)
-
-
 
         for neighbor in graph.neighbors(current_node):
             if ((neighbor not in visited_nodes and neighbor not in grey_nodes) or (nodes_distance[neighbor]>nodes_distance[current_node] + graph.distance(current_node, neighbor))):
@@ -145,23 +135,11 @@ def a_star_search(graph, initial_node, dest_node):
         if (dest_node in visited_nodes):
             break
 
-
-
-
-    # for i in  (nodes_distance):
-    #     pass
-      #  print (i),"Source",nodes_distance[i],"Dest:", get_heuristic_cost(i,dest_node)
-
     list = []
     while parent[last_node] is not None:
-
         list = [graph.get_edge(parent[last_node], last_node)] + list
         last_node = parent[last_node]
-        #print (last_node)
-    #print(list)
 
-    for i in list:
-        pass
     return list
 
 
