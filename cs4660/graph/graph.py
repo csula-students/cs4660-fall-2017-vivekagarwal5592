@@ -77,7 +77,6 @@ class Node(object):
         return not self.__eq__(other)
 
     def __hash__(self):
-
         return hash(self.data)
 
 class Edge(object):
