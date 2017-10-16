@@ -50,8 +50,6 @@ def dfs(graph, initial_node, dest_node):
             if (n not in visited_nodes):
                 all_neigbors_visited = False
                 Q = [n] +Q
-                # print(current_node)
-                # print(n)
                 nodes_distance[n] = nodes_distance[current_node] + graph.distance(current_node, n)
                 parent[n] = current_node
                 visited_nodes.append(n)
@@ -98,14 +96,13 @@ def dijkstra_search(graph, initial_node, dest_node):
     while parent[last_node] is not None:
         list = [graph.get_edge(parent[last_node], last_node)] + list
         last_node = parent[last_node]
-    #print(list)
+
 
 
     return list
 
 
 def a_star_search(graph, initial_node, dest_node):
-
 
     Q = {}
     hc = {}
@@ -121,6 +118,7 @@ def a_star_search(graph, initial_node, dest_node):
     visited_nodes.append(initial_node)
     while (bool(Q)):
         current_node = min(hc, key=hc.get)
+        hc.pop(current_node)
         Q.pop(current_node)
         visited_nodes.append(current_node)
 
@@ -137,14 +135,15 @@ def a_star_search(graph, initial_node, dest_node):
 
     list = []
     while parent[last_node] is not None:
+
         list = [graph.get_edge(parent[last_node], last_node)] + list
         last_node = parent[last_node]
 
     return list
 
 
-def get_heuristic_cost(node1,node2):
 
+def get_heuristic_cost(node1,node2):
     xdifference= abs(node1.data.x-node2.data.x)
     ydifference =abs(node1.data.y - node2.data.y)
     return xdifference + ydifference
