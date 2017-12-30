@@ -40,20 +40,20 @@ def construct_graph_from_file(graph, file_path):
     f = open(file_path)
     data = f.read()
     data = data.split('\n')
-   # print (data)
+
     for i in range(len(data)):
         if (i == 0):
-          #  if(isinstance(graph, AdjacencyMatrix)):
-           #     graph.initialize(int(data[i]))
+            no_of_nodes =data[i]
+            for j in range(int(no_of_nodes)):
+                graph.add_node(Node(j))
             continue
         row = data[i].split(':')
-        graph.add_node(Node(int(row[0])))
-        graph.add_node(Node(int(row[1])))
+       # graph.add_node(Node(int(row[0])))
+        #graph.add_node(Node(int(row[1])))
         a = Node(int(row[0]))
         b = Node(int(row[1]))
         x = Edge(a,b,int(row[2]))
         graph.add_edge(x)
-
     return graph
 
 class Node(object):
@@ -142,7 +142,6 @@ class AdjacencyList(object):
             return False
         else:
             self.adjacency_list[from_node][to_node] = edge.weight
-         #   self.adjacency_list[to_node][from_node] = edge.weight
             return True
 
     def remove_edge(self, edge):
@@ -154,6 +153,15 @@ class AdjacencyList(object):
             return True
         else:
             return False
+
+    def distance(self,fromNode, toNode):
+        return (self.adjacency_list[fromNode][toNode])
+
+    def get_edge(self,fromNode,toNode):
+        return Edge(fromNode,toNode,self.adjacency_list[fromNode][toNode])
+
+    def get_graph(self):
+        return None
 
 class AdjacencyMatrix(object):
 
@@ -183,18 +191,21 @@ class AdjacencyMatrix(object):
         for i in range(len(self.adjacency_matrix[index_node])):
             if self.adjacency_matrix[index_node][i] != 0:
                 list.append(self.nodes[i])
-        list.sort(key=lambda x: x.data)
+                #list =   [self.nodes[i]] +list
+        #list.sort(key=lambda x: x.data)
         return list
 
     def add_node(self, node):
         if node not in self.nodes:
             list = [0 for j in range(len(self.nodes))]
+            #self.adjacency_matrix=[list] + self.adjacency_matrix
+            #self.nodes=[node] + self.nodes
             self.adjacency_matrix.append(list)
             (self.nodes).append(node)
             for i in range(len(self.adjacency_matrix)):
+                #self.adjacency_matrix[i]=[0] +self.adjacency_matrix[i]
                 self.adjacency_matrix[i].append(0)
-           # print(self.adjacency_matrix)
-
+            #print(self.nodes)
             return True
         else:
             return False
@@ -228,8 +239,8 @@ class AdjacencyMatrix(object):
         to_node = edge.to_node
         index_from_node = self.__get_node_index(from_node)
         index_to_node = self.__get_node_index(to_node)
-        if self.adjacency_matrix[index_from_node][ index_to_node] !=0:
-            self.adjacency_matrix[index_from_node][ index_to_node] =0
+        if self.adjacency_matrix[index_from_node][index_to_node] !=0:
+            self.adjacency_matrix[index_from_node][index_to_node] =0
             self.adjacency_matrix[index_to_node][index_from_node] = 0
             return True
         else:
@@ -239,6 +250,22 @@ class AdjacencyMatrix(object):
     def __get_node_index(self, node):
         return self.nodes.index(node);
         pass
+
+
+    def distance(self, fromNode, toNode):
+        index_from_node = self.__get_node_index(fromNode)
+        index_to_node = self.__get_node_index(toNode)
+        return self.adjacency_matrix[index_from_node][index_to_node]
+
+    def get_edge(self, fromNode, toNode):
+        index_from_node = self.__get_node_index(fromNode)
+        index_to_node = self.__get_node_index(toNode)
+        return Edge(fromNode, toNode, self.adjacency_matrix[index_from_node][index_to_node])
+
+
+    def get_graph(self):
+        return None
+
 
 class ObjectOriented(object):
     """ObjectOriented defines the edges and nodes as both list"""
@@ -290,4 +317,18 @@ class ObjectOriented(object):
             return True
         else:
             return False
+
+    def distance(self,fromNode, toNode):
+        for i in self.edges:
+            if i.from_node == fromNode and i.to_node == toNode:
+                return i.weight
+
+    def get_edge(self, fromNode, toNode):
+        for i in self.edges:
+            if i.from_node == fromNode and i.to_node == toNode:
+                return i
+
+    def get_graph(self):
+        return self.nodes
+
 
